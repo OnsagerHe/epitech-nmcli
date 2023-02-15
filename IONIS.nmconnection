@@ -15,7 +15,7 @@ key-mgmt=wpa-eap
 [802-1x]
 eap=peap;
 identity=USERNAME
-password=PASSWORD
+password=_PASSWORD
 phase2-auth=mschapv2
 
 [ipv4]
