@@ -17,20 +17,26 @@ function set_credentials() {
 	echo
 
 	sed -i "s/USERNAME/$uservar/g" $INITIAL_FILE
-	sed -i "s/PASSWORD/$passvar/g" $INITIAL_FILE
+	sed -i "s/_PASSWORD/$passvar/g" $INITIAL_FILE
 	sed -i "s/UUID/$UUID_CONNECTION/g" $INITIAL_FILE
 }
 
-function reload_network_manager() {
+function root_file() {
 	sudo cp $INITIAL_FILE $TARGET_LOCATION
+	sudo chmod 0600 $FILE
+	sudo chown root $FILE
+}
 
+function reload_network_manager() {
 	sudo systemctl restart NetworkManager
+	sleep 1s
 	nmcli con up IONIS
 }
 
 function main() {
 	network_manager_exist
 	set_credentials
+	root_file
 	reload_network_manager
 	exit 0
 }
