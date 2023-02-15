@@ -6,9 +6,8 @@ TARGET_LOCATION=/etc/NetworkManager/system-connections
 FILE=/etc/NetworkManager/system-connections/IONIS.nmconnection
 
 function network_manager_exist() {
-	if [[ ! -f "$FILE" ]]; then
-    	echo "NetworkManager exist ?"
-    	exit 1
+	if [[ -f "$FILE" ]]; then
+    	echo "IONIS.nmconnection replace"
 	fi
 }
 
